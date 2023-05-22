@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Result</title>
+</head>
+<body>
+  <p id="result"></p>
+
+  <script>
+    // get query from url
+function getParameterByName(name) {
+  name = name.replace(/[\[\]]/g, "\\$&");
+  var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+      results = regex.exec(window.location.href);
+  if (!results) return null;
+  if (!results[2]) return '';
+  return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
+// define Array
+var largerArray = ["Apple", "Banana", "Orange", "Mango", "Pineapple", "Grapefruit"];
+var specificArray = ["Dog", "Cat", "Rabbit", "Hamster"];
+
+// Get type
+var type = parseInt(getParameterByName('Type'));
+
+// get p tag
+var resultElement = document.getElementById("result");
+
+// progess tag
+if (type === 1) {
+  // return a result about happy guide
+  var randomElements = [];
+  for (var i = 0; i < 3; i++) {
+    var randomIndex = Math.floor(Math.random() * largerArray.length);
+    randomElements.push(largerArray[randomIndex]);
+  }
+  resultElement.textContent = randomElements.join(", ");
+} else if (type === 2) {
+  // return a string about happy song
+  var randomIndex = Math.floor(Math.random() * specificArray.length);
+  var randomElement = specificArray[randomIndex];
+  resultElement.textContent = randomElement;
+} else if (type === 3) {
+  // return a happy word
+  var randomIndex = Math.floor(Math.random() * largerArray.length);
+  var randomElement = largerArray[randomIndex];
+  resultElement.textContent = randomElement;
+} else {
+  resultElement.textContent = "Invalid Type parameter.";
+}
+  </script>
+</body>
+</html>
